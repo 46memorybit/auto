@@ -1,16 +1,15 @@
-const CACHE_NAME = 'auto-link-v1';
-const FILES = [
-'/auto_link/index.html',
-'/auto_link/app.js',
-'/auto_link/db.js',
-'/auto_link/manifest.webmanifest'
+const CACHE = 'link-auto-v1';
+const ASSETS = [
+'./',
+'./index.html',
+'./app.js',
+'./db.js',
+'./manifest.webmanifest'
 ];
 
 
 self.addEventListener('install', e => {
-e.waitUntil(
-caches.open(CACHE_NAME).then(cache => cache.addAll(FILES))
-);
+e.waitUntil(caches.open(CACHE).then(c => c.addAll(ASSETS)));
 });
 
 
