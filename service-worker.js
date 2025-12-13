@@ -1,12 +1,12 @@
 const CACHE_NAME = 'random-query-pwa-v1';
 const FILES_TO_CACHE = [
-  '/',
-  '/index.html',
-  '/app.js',
-  '/db.js',
-  '/manifest.webmanifest',
-  '/icons/icon-192.png',
-  '/icons/icon-512.png'
+  '/Auto_Link/',
+  '/Auto_Link/index.html',
+  '/Auto_Link/app.js',
+  '/Auto_Link/db.js',
+  '/Auto_Link/manifest.webmanifest',
+  '/Auto_Link/icons/icon-192.png',
+  '/Auto_Link/icons/icon-512.png'
 ];
 
 self.addEventListener('install', (event) => {
