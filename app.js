@@ -1,45 +1,47 @@
-document.addEventListener('DOMContentLoaded', async () => {
-  const memoEl = document.getElementById('memo');
-  const baseUrlEl = document.getElementById('baseUrl');
-  const autoRedirectEl = document.getElementById('autoRedirect');
-  const randomBtn = document.getElementById('randomBtn');
+window.addEventListener('load', async () => {
+if ('serviceWorker' in navigator) {
+navigator.serviceWorker.register('service-worker.js');
+}
 
-  // データ読み込み
-  const data = await db.getAll();
-  if (data.memo !== undefined) memoEl.value = data.memo || '';
-  if (data.baseUrl !== undefined) baseUrlEl.value = data.baseUrl || '';
-  if (data.autoRedirect !== undefined) autoRedirectEl.checked = data.autoRedirect;
 
-  // 入力変更時に保存
-  memoEl.addEventListener('input', () => db.set('memo', memoEl.value));
-  baseUrlEl.addEventListener('input', () => db.set('baseUrl', baseUrlEl.value));
-  autoRedirectEl.addEventListener('change', () => db.set('autoRedirect', autoRedirectEl.checked));
+const memo = document.getElementById('memo');
+const urlInput = document.getElementById('url');
+const autoJump = document.getElementById('autoJump');
+const randomBtn = document.getElementById('randomBtn');
 
-  // ランダム文字列生成（英数字8桁）
-  function generateRandomQuery() {
-    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    let result = '';
-    for (let i = 0; i < 8; i++) {
-      result += chars.charAt(Math.floor(Math.random() * chars.length));
-    }
-    return result;
-  }
 
-  randomBtn.addEventListener('click', async () => {
-    const baseUrl = baseUrlEl.value.trim();
-    if (!baseUrl) {
-      alert('ベースURLを入力してください');
-      return;
-    }
+// 保存データの復元
+const saved = await DB.get();
+if (saved) {
+memo.value = saved.memo || '';
+urlInput.value = saved.url || '';
+autoJump.checked = saved.autoJump || false;
+}
 
-    const query = generateRandomQuery();
-    const fullUrl = baseUrl + query;
 
-    // 新しいタブで開く（自動遷移が有効なら現在のタブ）
-    if (autoRedirectEl.checked) {
-      location.href = fullUrl;
-    } else {
-      window.open(fullUrl, '_blank');
-    }
-  });
+const save = () => {
+DB.set({
+memo: memo.value,
+url: urlInput.value,
+autoJump: autoJump.checked
+});
+};
+
+
+memo.addEventListener('input', save);
+urlInput.addEventListener('input', () => {
+save();
+if (autoJump.checked && urlInput.value) {
+location.href = urlInput.value;
+}
+});
+autoJump.addEventListener('change', save);
+
+
+randomBtn.addEventListener('click', () => {
+if (!urlInput.value) return;
+const q = Math.random().toString(36).substring(2, 10);
+const sep = urlInput.value.includes('?') ? '&' : '?';
+location.href = urlInput.value + sep + q;
+});
 });
