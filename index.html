@@ -2,28 +2,73 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-<title>Auto Link PWA</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+<title>Link Auto</title>
 <link rel="manifest" href="manifest.webmanifest" />
+<meta name="theme-color" content="#0f172a" />
+<style>
+body {
+margin: 0;
+font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+background: #0f172a;
+color: #fff;
+}
+.container {
+padding: 16px;
+}
+textarea, input[type="url"] {
+width: 100%;
+padding: 12px;
+border-radius: 12px;
+border: none;
+font-size: 16px;
+margin-bottom: 12px;
+}
+.row {
+display: flex;
+gap: 12px;
+align-items: center;
+margin-bottom: 12px;
+}
+button {
+flex: 1;
+padding: 14px;
+border-radius: 14px;
+border: none;
+font-size: 16px;
+background: #2563eb;
+color: #fff;
+}
+button.secondary {
+background: #334155;
+}
+label {
+display: flex;
+align-items: center;
+gap: 8px;
+font-size: 14px;
+}
+</style>
 </head>
 <body>
-<h1>Auto-Link</h1>
+<div class="container">
+<textarea id="memo" rows="4" placeholder="メモ"></textarea>
 
 
-<label>メモ</label><br />
-<textarea id="memo" rows="4" cols="40" style="font-size:16px;"></textarea><br /><br />
-
-
-<label>URL</label><br />
-<input type="url" id="url" size="40" style="font-size:16px;" /><br /><br />
+<input id="url" type="url" placeholder="https://example.com" />
 
 
 <label>
-<input type="checkbox" id="autoJump" /> 自動遷移を有効にする
-</label><br /><br />
+<input id="auto" type="checkbox" />
+起動時に自動で開く
+</label>
 
 
-<button id="randomBtn">ランダムクエリ生成</button>
+<div class="row">
+<button id="open">開く</button>
+<button id="random" class="secondary">ランダム</button>
+</div>
+</div>
 
 
 <script src="db.js"></script>
