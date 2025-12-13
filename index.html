@@ -38,9 +38,10 @@
   <script src="app.js"></script>
 
   <script>
-    // Service Worker登録
     if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('service-worker.js');
+      navigator.serviceWorker.register('/Auto_Link/service-worker.js', {
+        scope: '/Auto_Link/'
+      });
     }
   </script>
 </body>
