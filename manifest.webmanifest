@@ -1,10 +1,10 @@
 {
-"name": "Auto Link",
-"short_name": "AutoLink",
-"start_url": "/auto_link/index.html",
+"name": "Link Auto",
+"short_name": "LinkAuto",
+"start_url": "./index.html",
 "display": "standalone",
-"background_color": "#ffffff",
-"theme_color": "#000000",
+"background_color": "#0f172a",
+"theme_color": "#0f172a",
 "icons": [
 {
 "src": "icon-192.png",
