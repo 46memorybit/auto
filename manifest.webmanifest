@@ -2,18 +2,19 @@
   "name": "Random Query Tool",
   "short_name": "RandQuery",
   "description": "ランダムクエリ生成＆メモツール",
-  "start_url": "/",
+  "start_url": "/Auto_Link/",
+  "scope": "/Auto_Link/",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#3367D6",
   "icons": [
     {
-      "src": "icons/icon-192.png",
+      "src": "/Auto_Link/icons/icon-192.png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "icons/icon-512.png",
+      "src": "/Auto_Link/icons/icon-512.png",
       "sizes": "512x512",
       "type": "image/png"
     }
