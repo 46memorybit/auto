@@ -1,9 +1,12 @@
-const DB = {
-get(key, def) {
-const v = localStorage.getItem(key);
-return v === null ? def : JSON.parse(v);
-},
-set(key, val) {
-localStorage.setItem(key, JSON.stringify(val));
+function saveData() {
+localStorage.setItem('memo', memo.value);
+localStorage.setItem('url', url.value);
+localStorage.setItem('auto', auto.checked);
 }
-};
+
+
+function loadData() {
+memo.value = localStorage.getItem('memo') || '';
+url.value = localStorage.getItem('url') || '';
+auto.checked = localStorage.getItem('auto') === 'true';
+}
