@@ -1,13 +1,9 @@
 const DB = {
-key: 'auto-link-data',
-
-
-async get() {
-return JSON.parse(localStorage.getItem(this.key));
+get(key, def) {
+const v = localStorage.getItem(key);
+return v === null ? def : JSON.parse(v);
 },
-
-
-async set(data) {
-localStorage.setItem(this.key, JSON.stringify(data));
+set(key, val) {
+localStorage.setItem(key, JSON.stringify(val));
 }
 };
