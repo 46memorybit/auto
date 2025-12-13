@@ -1,10 +1,10 @@
 {
-"name": "Link Auto",
-"short_name": "LinkAuto",
+"name": "Link PWA",
+"short_name": "Link",
 "start_url": "./index.html",
 "display": "standalone",
-"background_color": "#0f172a",
-"theme_color": "#0f172a",
+"background_color": "#111827",
+"theme_color": "#111827",
 "icons": [
 {
 "src": "icon-192.png",
