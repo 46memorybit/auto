@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Random Query PWA</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icons/icon-192.png">
+  <style>
+    body { font-family: sans-serif; padding: 20px; max-width: 600px; margin: auto; }
+    label { display: block; margin-top: 20px; }
+    textarea { width: 100%; height: 150px; }
+    input[type="text"] { width: 100%; padding: 8px; }
+    button { padding: 10px 20px; margin-top: 20px; font-size: 16px; }
+  </style>
+</head>
+<body>
+  <h1>ランダムクエリ生成ツール</h1>
+
+  <label>
+    メモエリア
+    <textarea id="memo"></textarea>
+  </label>
+
+  <label>
+    ベースURL（例: https://example.com/search?q=）
+    <input type="text" id="baseUrl" placeholder="https://example.com/search?q=">
+  </label>
+
+  <label>
+    <input type="checkbox" id="autoRedirect">
+    自動遷移を有効にする
+  </label>
+
+  <button id="randomBtn">ランダムクエリ生成＆開く</button>
+
+  <script src="db.js"></script>
+  <script src="app.js"></script>
+
+  <script>
+    // Service Worker登録
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('service-worker.js');
+    }
+  </script>
+</body>
+</html>
