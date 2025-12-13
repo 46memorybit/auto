@@ -19,6 +19,12 @@ autoJump.checked = saved.autoJump || false;
 }
 
 
+// 起動時自動遷移
+if (autoJump.checked && urlInput.value) {
+location.href = urlInput.value;
+}
+
+
 const save = () => {
 DB.set({
 memo: memo.value,
@@ -33,15 +39,4 @@ urlInput.addEventListener('input', () => {
 save();
 if (autoJump.checked && urlInput.value) {
 location.href = urlInput.value;
-}
-});
-autoJump.addEventListener('change', save);
-
-
-randomBtn.addEventListener('click', () => {
-if (!urlInput.value) return;
-const q = Math.random().toString(36).substring(2, 10);
-const sep = urlInput.value.includes('?') ? '&' : '?';
-location.href = urlInput.value + sep + q;
-});
 });
