@@ -1,12 +1,13 @@
-function saveData() {
-localStorage.setItem('memo', memo.value);
-localStorage.setItem('url', url.value);
-localStorage.setItem('auto', auto.checked);
-}
-
+const DB_KEY = 'auto_link_pwa';
 
 function loadData() {
-memo.value = localStorage.getItem('memo') || '';
-url.value = localStorage.getItem('url') || '';
-auto.checked = localStorage.getItem('auto') === 'true';
+  try {
+    return JSON.parse(localStorage.getItem(DB_KEY)) || {};
+  } catch {
+    return {};
+  }
+}
+
+function saveData(data) {
+  localStorage.setItem(DB_KEY, JSON.stringify(data));
 }
