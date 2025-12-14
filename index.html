@@ -2,8 +2,10 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport"
-        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+  />
   <title>Auto Link PWA</title>
 
   <link rel="manifest" href="manifest.webmanifest">
@@ -19,7 +21,7 @@
       margin: 0;
       padding: 0;
       height: 100%;
-      overflow: hidden; /* 縦横スクロール禁止 */
+      overflow: hidden;
       font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
       background: #f2f2f7;
     }
@@ -28,13 +30,18 @@
       height: 100%;
       display: flex;
       flex-direction: column;
-      padding: 16px;
-      gap: 16px;
     }
 
-    textarea, input[type="url"] {
+    /* ===== 上部50%：メモ ===== */
+    .memo-area {
+      height: 50%;
+      padding: 16px;
+    }
+
+    textarea {
       width: 100%;
-      font-size: 16px; /* iOSズーム防止 */
+      height: 100%;
+      font-size: 16px;
       padding: 12px;
       border-radius: 12px;
       border: none;
@@ -44,14 +51,50 @@
       resize: none;
     }
 
-    textarea {
-      flex: 1;
+    /* ===== 下部50%：操作 ===== */
+    .control-area {
+      height: 50%;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* 上側UI */
+    .controls-top {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    /* 下側固定エリア */
+    .controls-bottom {
+      margin-top: auto;
+      height: 40%;           /* 下半分の中で配置制御 */
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+
+    /* 最下部10%の余白 */
+    .bottom-spacer {
+      height: 10%;
+    }
+
+    input[type="url"] {
+      width: 100%;
+      font-size: 16px;
+      padding: 12px;
+      border-radius: 12px;
+      border: none;
+      outline: none;
+      background: #ffffff;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
     }
 
     .row {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
     }
 
     .row label {
@@ -64,10 +107,18 @@
       padding: 14px;
       border-radius: 14px;
       border: none;
+      font-weight: 600;
+    }
+
+    .primary {
       background: #007aff;
       color: #fff;
-      font-weight: 600;
       box-shadow: 0 4px 12px rgba(0,122,255,0.3);
+    }
+
+    .secondary {
+      background: #e5e5ea;
+      color: #111;
     }
 
     button:active {
@@ -77,16 +128,33 @@
 </head>
 <body>
   <div class="app">
-    <textarea id="memo" placeholder="メモ"></textarea>
-
-    <input id="url" type="url" placeholder="https://example.com">
-
-    <div class="row">
-      <input type="checkbox" id="auto">
-      <label for="auto">自動遷移を有効にする</label>
+    <!-- 上部50% -->
+    <div class="memo-area">
+      <textarea id="memo" placeholder="メモ"></textarea>
     </div>
 
-    <button id="openBtn">開く</button>
+    <!-- 下部50% -->
+    <div class="control-area">
+      <!-- 通常操作 -->
+      <div class="controls-top">
+        <input id="url" type="url" placeholder="https://example.com">
+
+        <div class="row">
+          <input type="checkbox" id="auto">
+          <label for="auto">自動遷移を有効にする</label>
+        </div>
+
+        <button id="openBtn" class="primary">開く</button>
+      </div>
+
+      <!-- 下部固定 -->
+      <div class="controls-bottom">
+        <button id="randomBtn" class="secondary">
+          Android用：ランダムクエリで再読み込み
+        </button>
+        <div class="bottom-spacer"></div>
+      </div>
+    </div>
   </div>
 
   <script src="db.js"></script>
